@@ -3,6 +3,8 @@
 
 const ORS_KEY = () => localStorage.getItem("ors_api_key") || "";
 
+type Polygon = { type: "Polygon"; coordinates: number[][][] };
+
 export type LngLat = [number, number];
 
 export interface RouteResult {
@@ -15,7 +17,7 @@ export interface RouteResult {
 export async function getRoute(
   start: LngLat,
   end: LngLat,
-  avoidPolygons?: GeoJSON.Polygon[],
+  avoidPolygons?: Polygon[],
 ): Promise<RouteResult> {
   const key = ORS_KEY();
   if (key) {
@@ -68,7 +70,7 @@ export async function getRoute(
 }
 
 // Build a small circular polygon (in degrees) to simulate a hazard avoid zone
-export function hazardPolygon(center: LngLat, radiusKm = 3): GeoJSON.Polygon {
+export function hazardPolygon(center: LngLat, radiusKm = 3): Polygon {
   const steps = 24;
   const coords: LngLat[] = [];
   const dLat = radiusKm / 111;
