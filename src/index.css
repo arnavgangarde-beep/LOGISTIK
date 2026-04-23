@@ -8,35 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* FastConnect — Premium dark futuristic logistics theme */
+    --background: 230 35% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 230 30% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 230 35% 8%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 264 90% 66%;
+    --primary-foreground: 230 35% 6%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 80% 60%;
+    --secondary-foreground: 230 35% 6%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 230 25% 14%;
+    --muted-foreground: 220 15% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 24 95% 58%;
+    --accent-foreground: 230 35% 6%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 230 25% 18%;
+    --input: 230 25% 16%;
+    --ring: 264 90% 66%;
 
-    --radius: 0.5rem;
+    --radius: 0.9rem;
+
+    /* Brand glows */
+    --glow-primary: 264 90% 66%;
+    --glow-secondary: 220 95% 62%;
+    --glow-accent: 24 95% 58%;
+
+    /* Gradients */
+    --gradient-hero: radial-gradient(ellipse at top, hsl(264 90% 25% / 0.55), transparent 60%), radial-gradient(ellipse at bottom right, hsl(24 95% 40% / 0.35), transparent 60%), linear-gradient(180deg, hsl(230 40% 6%), hsl(230 35% 4%));
+    --gradient-primary: linear-gradient(135deg, hsl(264 90% 66%), hsl(220 90% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(24 95% 58%), hsl(335 85% 60%));
+    --gradient-card: linear-gradient(160deg, hsl(230 30% 12% / 0.7), hsl(230 35% 8% / 0.7));
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(264 90% 66% / 0.45);
+    --shadow-glow-accent: 0 0 40px hsl(24 95% 58% / 0.45);
+    --shadow-elegant: 0 20px 60px -20px hsl(264 90% 30% / 0.6);
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,34 +73,26 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 230 35% 6%;
     --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
+    --card: 230 30% 9%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
+    --popover: 230 35% 8%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
+    --primary: 264 90% 66%;
+    --primary-foreground: 230 35% 6%;
+    --secondary: 220 80% 60%;
+    --secondary-foreground: 230 35% 6%;
+    --muted: 230 25% 14%;
+    --muted-foreground: 220 15% 65%;
+    --accent: 24 95% 58%;
+    --accent-foreground: 230 35% 6%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
+    --border: 230 25% 18%;
+    --input: 230 25% 16%;
+    --ring: 264 90% 66%;
+    --sidebar-background: 230 40% 5%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -101,5 +110,48 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-xl bg-card/40 border border-white/5;
+  }
+  .glass-strong {
+    @apply backdrop-blur-2xl bg-card/70 border border-white/10;
+  }
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-hero {
+    background: var(--gradient-hero);
+  }
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+  .glow-accent {
+    box-shadow: var(--shadow-glow-accent);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   }
 }
