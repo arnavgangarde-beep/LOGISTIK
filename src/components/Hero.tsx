@@ -7,20 +7,18 @@ import heroImg from "@/assets/hero-truck.jpg";
 export const Hero = () => {
   const navigate = useNavigate();
   return (
-    <section className="relative overflow-hidden bg-hero pt-32 pb-24">
-      <div className="absolute inset-0 grid-bg opacity-60" aria-hidden />
-      <div className="absolute -left-32 top-40 h-72 w-72 rounded-full bg-primary/30 blur-3xl" aria-hidden />
-      <div className="absolute -right-32 top-10 h-72 w-72 rounded-full bg-accent/30 blur-3xl" aria-hidden />
+    <section className="relative overflow-hidden bg-background pt-40 pb-24 font-sans">
+      <div className="absolute inset-0 bg-[radial-gradient(hsl(var(--primary))_1px,transparent_1px)] [background-size:24px_24px] opacity-10" aria-hidden />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
-        <div>
+      <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-6 lg:grid-cols-2">
+        <div className="z-10">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-xs text-muted-foreground backdrop-blur"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 border-2 border-primary bg-background px-4 py-1.5 text-[10px] font-heading font-bold uppercase tracking-widest text-primary bauhaus-shadow"
           >
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
+            <div className="h-2 w-2 bg-tertiary"></div>
             AI-powered re-routing in real time
           </motion.div>
 
@@ -28,18 +26,17 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.7 }}
-            className="mt-5 text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl"
+            className="mt-8 font-heading font-black text-6xl md:text-8xl tracking-tighter uppercase leading-[0.9] text-primary"
           >
-            Deliver Faster,
-            <br />
-            <span className="text-gradient">Drive Smarter.</span>
+            Deliver Faster,<br />
+            <span className="text-secondary">Drive Smarter.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.6 }}
-            className="mt-6 max-w-xl text-lg text-muted-foreground"
+            className="mt-8 max-w-xl text-sm font-medium text-muted-foreground"
           >
             AI-powered logistics route planning for trucks. Avoid traffic, storms, and
             delays in real time — and keep every customer in the loop.
@@ -49,70 +46,73 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
+            className="mt-10 flex flex-wrap items-center gap-4"
           >
             <Button
               size="lg"
               onClick={() => navigate("/signup")}
-              className="group bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-[0_0_36px_hsl(var(--primary)/0.5)] hover:opacity-95"
+              className="bg-primary text-primary-foreground border-2 border-primary hover:bg-tertiary hover:text-white rounded-none font-heading font-bold uppercase tracking-widest text-[10px] transition-colors py-6 shrink-0"
             >
               Get Started
-              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-3 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="border-border bg-card/40 backdrop-blur">
-              <Play className="mr-1 h-4 w-4" /> Watch Demo
+            <Button size="lg" variant="outline" className="bg-background text-primary border-2 border-primary hover:bg-muted rounded-none font-heading font-bold uppercase tracking-widest text-[10px] transition-colors py-6 shrink-0">
+              <Play className="mr-3 h-4 w-4" /> Watch Demo
             </Button>
           </motion.div>
 
-          <div className="mt-10 grid max-w-md grid-cols-3 gap-6 text-sm">
+          <div className="mt-16 grid max-w-md grid-cols-3 gap-8">
             {[
               { k: "12k+", v: "Trucks routed" },
               { k: "23%", v: "Faster ETAs" },
               { k: "99.9%", v: "Uptime" },
             ].map((s) => (
               <div key={s.v}>
-                <div className="text-2xl font-semibold text-gradient">{s.k}</div>
-                <div className="text-xs text-muted-foreground">{s.v}</div>
+                <div className="font-heading font-black text-3xl tracking-tighter text-primary">{s.k}</div>
+                <div className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground mt-1">{s.v}</div>
               </div>
             ))}
           </div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-          className="relative"
+           initial={{ opacity: 0, x: 20 }}
+           animate={{ opacity: 1, x: 0 }}
+           transition={{ delay: 0.3, duration: 0.7 }}
+           className="relative aspect-video lg:aspect-square flex items-center justify-center lg:justify-end"
         >
-          <div className="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-tr from-primary/40 to-accent/40 blur-2xl" aria-hidden />
-          <div className="overflow-hidden rounded-[1.75rem] border border-border bg-card/40 p-2 backdrop-blur-xl">
-            <img
-              src={heroImg}
-              alt="Smart logistics truck driving on a glowing neon highway"
-              width={1600}
-              height={900}
-              className="rounded-[1.4rem]"
-            />
+          {/* Main geometric image container */}
+          <div className="relative w-full max-w-[500px] border-2 border-primary bg-background p-3 bauhaus-shadow-lg z-10">
+             <img
+               src={heroImg}
+               alt="Smart logistics truck driving on a glowing neon highway"
+               className="w-full h-auto max-h-[350px] object-cover grayscale contrast-125"
+             />
+             <div className="absolute inset-x-3 inset-y-3 bg-secondary/10 border-2 border-primary mix-blend-multiply pointer-events-none"></div>
           </div>
 
           <motion.div
-            animate={{ y: [0, -8, 0] }}
+            animate={{ y: [0, -4, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
-            className="absolute -left-6 top-10 hidden rounded-2xl border border-border glass-strong px-4 py-3 shadow-elegant md:block"
+            className="absolute -left-12 top-20 hidden border-2 border-primary bg-background p-4 bauhaus-shadow z-20 md:block"
           >
-            <div className="text-xs text-muted-foreground">ETA</div>
-            <div className="text-lg font-semibold">2h 14m</div>
-            <div className="text-xs text-accent">Saved 24 mins</div>
+            <div className="text-[8px] uppercase tracking-widest font-heading font-bold text-muted-foreground border-b-2 border-primary pb-2 mb-2">ETA</div>
+            <div className="text-3xl font-heading font-black tracking-tighter text-primary">2h 14m</div>
+            <div className="text-[10px] font-bold text-accent uppercase tracking-widest bg-primary px-2 py-0.5 mt-2 inline-block">Saved 24 mins</div>
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 4, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
-            className="absolute -right-4 bottom-8 hidden rounded-2xl border border-border glass-strong px-4 py-3 shadow-elegant md:block"
+            className="absolute -right-8 bottom-16 hidden border-2 border-primary bg-background p-4 bauhaus-shadow z-20 md:block"
           >
-            <div className="text-xs text-muted-foreground">Hazard</div>
-            <div className="text-sm font-semibold">⚠ Storm rerouted</div>
+             <div className="text-[8px] uppercase tracking-widest font-heading font-bold text-muted-foreground border-b-2 border-primary pb-2 mb-2 flex items-center justify-between">Hazard <div className="h-2 w-2 bg-destructive"></div></div>
+             <div className="text-sm font-heading font-bold uppercase tracking-wider text-primary mt-2">Storm Rerouted</div>
           </motion.div>
+
+          {/* Decorative geometric shapes */}
+          <div className="absolute top-10 right-20 w-16 h-16 bg-accent border-2 border-primary z-0 opacity-80 mix-blend-multiply rotate-12"></div>
+          <div className="absolute bottom-20 left-10 w-24 h-24 border-4 border-tertiary z-0 opacity-80 -rotate-6"></div>
         </motion.div>
       </div>
     </section>

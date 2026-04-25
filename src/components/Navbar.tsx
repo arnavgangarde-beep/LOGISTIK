@@ -20,29 +20,29 @@ export const Navbar = () => {
       className="fixed inset-x-0 top-0 z-50"
     >
       <div className="mx-auto mt-4 max-w-6xl px-4">
-        <div className="glass flex items-center justify-between rounded-2xl px-4 py-2.5">
+        <div className="bg-background border-2 border-primary bauhaus-shadow flex items-center justify-between px-6 py-4">
           <Link to="/" aria-label="FastConnect home">
-            <Logo />
+            <h1 className="font-heading font-black text-2xl tracking-tighter uppercase text-primary">LOGISTIK</h1>
           </Link>
           <nav className="hidden items-center gap-7 md:flex">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="text-[10px] font-heading font-bold uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
               >
                 {l.label}
               </a>
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/login")} className="font-heading font-bold uppercase text-[10px] tracking-widest hover:text-primary rounded-none">
               Sign in
             </Button>
             <Button
               size="sm"
               onClick={() => navigate("/signup")}
-              className="bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-[0_0_24px_hsl(var(--primary)/0.4)] hover:opacity-90"
+              className="bg-accent text-primary border-2 border-primary font-heading font-bold uppercase text-[10px] tracking-widest hover:bg-background transition-colors rounded-none px-6"
             >
               Get Started
             </Button>

@@ -21,10 +21,10 @@ export const Features = () => (
   <section id="features" className="relative py-24">
     <div className="mx-auto max-w-6xl px-4">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-          Why <span className="text-gradient">FastConnect</span>
+        <h2 className="font-heading font-black text-5xl tracking-tighter uppercase md:text-6xl text-primary">
+          System <span className="text-tertiary">Architecture</span>
         </h2>
-        <p className="mt-4 text-muted-foreground">
+        <p className="mt-4 text-[10px] font-bold tracking-widest uppercase text-muted-foreground">
           A logistics OS that thinks ahead. Built for fleets that cannot afford delays.
         </p>
       </div>
@@ -38,13 +38,13 @@ export const Features = () => (
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: i * 0.06, duration: 0.5 }}
             whileHover={{ y: -4 }}
-            className="group relative overflow-hidden rounded-2xl border border-border bg-card/40 p-6 backdrop-blur-xl"
+            className="group relative overflow-hidden border-2 border-primary bg-background p-6 bauhaus-shadow z-10 transition-transform hover:-translate-y-2 hover:bg-muted"
           >
-            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition-opacity group-hover:bg-primary/20" />
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-border">
+            <div className="absolute top-0 right-0 h-10 w-10 border-l-2 border-b-2 border-primary bg-accent/20 group-hover:bg-accent" />
+            <div className="flex h-12 w-12 items-center justify-center border-2 border-primary bg-primary text-primary-foreground mb-6">
               <f.icon className="h-5 w-5 text-primary" />
             </div>
-            <h3 className="mt-5 text-lg font-semibold">{f.title}</h3>
+            <h3 className="text-lg font-heading font-bold uppercase tracking-wider">{f.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{f.desc}</p>
           </motion.div>
         ))}
