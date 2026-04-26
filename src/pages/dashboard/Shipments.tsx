@@ -1,13 +1,32 @@
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
-import { ArrowRight, Package } from "lucide-react";
+import { ArrowRight, Package, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Shipments() {
-  const shipments = [
+  const [shipments, setShipments] = useState([
     { id: "LK-9022-X", origin: "BER", dest: "SIN", label: "URGENT", color: "bg-tertiary", progress: "85%", eta: "OCT 24, 14:00", weight: "1,240 KG" },
     { id: "LK-5510-Y", origin: "RTM", dest: "NYC", label: "STANDARD", color: "bg-secondary", progress: "60%", eta: "NOV 02, 08:30", weight: "42 TEUs" },
-    { id: "LK-4401-Z", origin: "COL", dest: "MIA", label: "DELAYED", color: "bg-destructive", alert: true, progress: "30%", eta: "0.5 HOURS", weight: "HOLD" },
+    { id: "LK-4401-Z", origin: "COL", dest: "MIA", label: "DELAYED", color: "bg-destructive", alert: true, progress: "30%", eta: "UNKNOWN", weight: "HOLD" },
     { id: "LK-7192-A", origin: "SHG", dest: "LON", label: "IN ROUTE", color: "bg-accent", progress: "90%", eta: "OCT 30, 22:00", weight: "850 m³" },
-  ];
+  ]);
+
+  const [resolvingId, setResolvingId] = useState<string | null>(null);
+
+  const resolveAlert = (id: string) => {
+    setResolvingId(id);
+    setTimeout(() => {
+      setShipments(prev => prev.map(s => {
+        if (s.id === id) {
+          return { ...s, alert: false, label: "REROUTED", color: "bg-primary", eta: "OCT 25, 10:00" };
+        }
+        return s;
+      }));
+      setResolvingId(null);
+      toast.success(`Shipment ${id} alert resolved. Itinerary rerouted.`);
+    }, 1500);
+  };
+
   return (
     <DashboardLayout>
       <div className="space-y-6 max-w-[1400px] mx-auto font-sans">
@@ -29,8 +48,8 @@ export default function Shipments() {
                 <span className="font-heading font-black text-2xl">124</span>
                 <span className="text-[8px] uppercase font-bold tracking-widest mt-1">Active</span>
              </div>
-             <div className="bg-accent text-primary border-2 border-primary w-16 h-16 flex flex-col justify-center items-center bauhaus-shadow cursor-pointer hover:bg-background transition-colors">
-                <span className="font-heading font-black text-2xl">08</span>
+             <div className="bg-destructive text-white border-2 border-primary w-16 h-16 flex flex-col justify-center items-center bauhaus-shadow cursor-pointer hover:bg-primary transition-colors">
+                <span className="font-heading font-black text-2xl">{shipments.filter(s => s.alert).length}</span>
                 <span className="text-[8px] uppercase font-bold tracking-widest mt-1">Alerts</span>
              </div>
           </div>
@@ -60,18 +79,18 @@ export default function Shipments() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
            <div className="lg:col-span-1 flex flex-col gap-4">
               {shipments.map((s) => (
-                 <div key={s.id} className={`${s.alert ? 'bg-secondary/10' : 'bg-background'} border-2 border-primary bauhaus-shadow flex flex-col transition-all hover:-translate-y-1 cursor-pointer`}>
+                 <div key={s.id} className={`${s.alert ? 'bg-destructive/10' : 'bg-background'} border-2 border-primary bauhaus-shadow flex flex-col transition-all hover:-translate-y-1`}>
                     <div className="flex justify-between items-center bg-primary text-primary-foreground p-2 text-[10px] font-heading font-bold uppercase tracking-widest">
                        <span>{s.id}</span>
                        <div className="flex gap-2 items-center">
                          <span>{s.label}</span>
-                         {s.alert && <div className="w-2 h-2 bg-secondary rounded-none shadow-[0_0_8px_red]"></div>}
+                         {s.alert && <div className="w-2 h-2 bg-destructive rounded-none shadow-[0_0_8px_red] animate-pulse"></div>}
                        </div>
                     </div>
                     <div className="p-4 space-y-4">
                        <div className="flex items-center gap-4">
                           <div className={`w-8 h-8 ${s.color} border-2 border-primary flex items-center justify-center`}>
-                            <Package className={`h-4 w-4 ${s.color === 'bg-accent' ? 'text-primary' : 'text-white'}`} />
+                            {s.label === 'REROUTED' ? <CheckCircle2 className="h-4 w-4 text-white" /> : <Package className={`h-4 w-4 ${s.color === 'bg-accent' ? 'text-primary' : 'text-white'}`} />}
                           </div>
                           <div className="flex-1">
                              <div className="flex justify-between items-center text-[10px] font-heading font-bold uppercase tracking-widest mb-1">
@@ -89,13 +108,13 @@ export default function Shipments() {
                        </div>
                     </div>
                     {s.alert ? (
-                      <div className="bg-secondary text-white text-[10px] font-heading font-bold uppercase tracking-widest p-2 text-center border-t-2 border-primary hover:bg-primary transition-colors flex items-center justify-center gap-2">
-                         RESOLVE ALERT <ArrowRight className="w-3 h-3"/>
-                      </div>
+                      <button onClick={() => resolveAlert(s.id)} disabled={resolvingId === s.id} className="w-full bg-destructive text-white text-[10px] font-heading font-bold uppercase tracking-widest p-3 text-center border-t-2 border-primary hover:bg-primary transition-colors flex items-center justify-center gap-2">
+                         {resolvingId === s.id ? "RESOLVING..." : "RESOLVE ALERT"} <ArrowRight className="w-3 h-3"/>
+                      </button>
                     ) : (
-                      <div className="bg-background text-primary text-[10px] font-heading font-bold uppercase tracking-widest p-2 text-center border-t-2 border-primary hover:bg-muted transition-colors flex items-center justify-center gap-2">
+                      <button className="w-full bg-background text-primary text-[10px] font-heading font-bold uppercase tracking-widest p-3 text-center border-t-2 border-primary hover:bg-muted transition-colors flex items-center justify-center gap-2">
                          VIEW LOGS <ArrowRight className="w-3 h-3"/>
-                      </div>
+                      </button>
                     )}
                  </div>
               ))}
@@ -114,7 +133,7 @@ export default function Shipments() {
                     {/* Simulated points */}
                     <div className="absolute top-[30%] left-[20%] w-2 h-2 bg-accent shadow-[0_0_10px_#FFCC00]"></div>
                     <div className="absolute top-[40%] left-[40%] w-2 h-2 bg-tertiary"></div>
-                    <div className="absolute bottom-[20%] right-[30%] w-3 h-3 bg-secondary animate-pulse shadow-[0_0_10px_#E63B2E]"></div>
+                    <div className={`absolute bottom-[20%] right-[30%] w-3 h-3 ${shipments.find(s => s.alert) ? 'bg-destructive animate-pulse shadow-[0_0_10px_#E63B2E]' : 'bg-primary border border-primary-foreground'}`}></div>
                     
                     {/* Geometric scanner box */}
                     <div className="absolute bottom-[10%] right-[20%] w-48 h-32 border-2 border-tertiary opacity-50 relative">
